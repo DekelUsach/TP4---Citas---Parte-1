@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function Input() {
+export default function Input({tipo, name, holder}) {
 
   return (
-        <input className="form-control form-control-lg" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example"></input>
-  )
+    <input type={tipo} name={name} className="u-full-width"placeholder={holder} value=""/>
+    )
 }
