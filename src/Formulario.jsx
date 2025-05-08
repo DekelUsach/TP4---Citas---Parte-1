@@ -1,26 +1,40 @@
-import React, { useState } from 'react';
-import Input from './Input';
+import React, { useState } from "react";
+import Input from "./Input";
 
 const cosasVacias = {
-  mascota: '',
-  propietario: '',
-  fecha: '',
-  hora: '',
-  sintomas: ''
+  mascota: "",
+  propietario: "",
+  fecha: "",
+  hora: "",
+  sintomas: "",
 };
 
 export default function Formulario({ onNuevaCita }) {
   const [cita, setCita] = useState(cosasVacias);
+  const [error, setError] = useState(false);
 
-  const cambioDatos = e => {
+  const cambioDatos = (e) => {
     setCita({
       ...cita,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const mandarDatos = e => {
+  const mandarDatos = (e) => {
     e.preventDefault();
+
+    if (
+      cita.mascota.trim() === "" ||
+      cita.propietario.trim() === "" ||
+      cita.fecha.trim() === "" ||
+      cita.hora.trim() === "" ||
+      cita.sintomas.trim() === ""
+    ) {
+      setError(true);
+      return;
+    }
+
+    setError(false);
     onNuevaCita(cita);
     setCita(cosasVacias);
   };
@@ -28,6 +42,9 @@ export default function Formulario({ onNuevaCita }) {
   return (
     <div className="one-half column">
       <h2>Crear mi Cita</h2>
+      {error && (
+        <p className="alerta-error">Todos los campos son obligatorios</p>
+      )}
       <form onSubmit={mandarDatos}>
         <label>Nombre Mascota</label>
         <Input
