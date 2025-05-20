@@ -20,9 +20,9 @@ export default function Formulario({ onNuevaCita }) {
     });
   };
 
-  const clearLocaleStorage = () => {
-    localStorage.clear();
-  };
+  // const clearLocaleStorage = () => {
+  //   localStorage.clear();
+  // };
 
   const mandarDatos = (e) => {
     e.preventDefault();
@@ -101,12 +101,7 @@ export default function Formulario({ onNuevaCita }) {
         </button>
        
       </form>
-      <button
-          onClick={clearLocaleStorage}
-          className="u-full-width button-primary"
-        >
-          Limpiar localStorage
-        </button>
+  
     </div>
   );
 }
