@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import CitasContainer from "./CitasContainer";
 import Formulario from "./Formulario";
 
 function App() {
-  const [citas, setCitas] = useState([]);
+  const [citas, setCitas] = useState(() => {
+    const citasGuardadas = localStorage.getItem("citas");
+    if (citasGuardadas != null) return JSON.parse(citasGuardadas);
+    else return [];
+  });
 
-  const crearCita = nuevaCita => {
-    setCitas(prev => [...prev, nuevaCita]);
+  useEffect(() => {
+    localStorage.setItem("citas", JSON.stringify(citas));
+  }, [citas]);
+
+  const crearCita = (nuevaCita) => {
+    setCitas((prev) => [...prev, nuevaCita]);
   };
 
   function eliminarCita(indice) {
-    setCitas(function (citasAnteriores) {
-      return citasAnteriores.filter(function (cita, i) {
-        return i !== indice;
-      });
-    });
+    setCitas((citasAnteriores) =>
+      citasAnteriores.filter((cita, i) => i !== indice)
+    );
   }
-
 
   return (
     <>

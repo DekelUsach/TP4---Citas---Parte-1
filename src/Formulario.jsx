@@ -20,6 +20,10 @@ export default function Formulario({ onNuevaCita }) {
     });
   };
 
+  const clearLocaleStorage = () => {
+    localStorage.clear();
+  };
+
   const mandarDatos = (e) => {
     e.preventDefault();
 
@@ -37,6 +41,7 @@ export default function Formulario({ onNuevaCita }) {
     setError(false);
     onNuevaCita(cita);
     setCita(cosasVacias);
+    
   };
 
   return (
@@ -94,7 +99,14 @@ export default function Formulario({ onNuevaCita }) {
         <button type="submit" className="u-full-width button-primary">
           Agregar Cita
         </button>
+       
       </form>
+      <button
+          onClick={clearLocaleStorage}
+          className="u-full-width button-primary"
+        >
+          Limpiar localStorage
+        </button>
     </div>
   );
 }
